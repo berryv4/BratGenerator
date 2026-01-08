@@ -1,1 +1,821 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Berry Brat Generator - BERRY MOD APEKA</title>
+<link rel="shortcut icon" href="https://berrymodapeka.edgeone.app/favicon.ico" type="image/x-icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<meta name="description" content="Berry Brat Generator adalah alat online untuk membuat sticker Brat keren dalam format PNG dan GIF secara instan. Gratis, cepat, tanpa watermark.">
+<meta name="keywords" content="brat generator, sticker brat, berry brat, brat png, brat gif, sticker generator, berry mod ap eka, berry v4">
+<meta name="author" content="Berry Mod Apeka">
+<link rel="canonical" href="https://berrymodapeka.edgeone.app/brat" />
+<meta property="og:title" content="Berry Brat Generator — Buat Sticker Brat PNG & GIF Gratis" />
+<meta property="og:description" content="Buat sticker Brat PNG & GIF secara instan dengan Berry Brat Generator. Cepat, gratis, tanpa watermark." />
+<meta property="og:image" content="https://berrymodapeka.edgeone.app/og-brat.jpg" />
+<meta property="og:url" content="https://berrymodapeka.edgeone.app/brat" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Berry Brat Generator — Buat Sticker Brat PNG & GIF Gratis">
+<meta name="twitter:description" content="Generator Brat online untuk membuat sticker PNG & GIF dengan kualitas tinggi.">
+<meta name="twitter:image" content="https://berrymodapeka.edgeone.app/og-brat.jpg">
+<meta name="application-name" content="Berry Brat Generator">
+<meta name="theme-color" content="#647cf7">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Berry Brat Generator",
+  "url": "https://berrymodapeka.edgeone.app/brat",
+  "description": "Generator sticker Brat online untuk membuat gambar PNG dan GIF secara instan dan gratis.",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Berry Mod Apeka",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://berrymodapeka.edgeone.app/favicon.ico"
+    }
+  }
+}
+</script>
 
+  <style>
+    :root {
+      --primary: #647cf7;
+      --primary-light: #7b8cff;
+      --bg: #131627;
+      --text: #d5d7e3;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --glass-bg: rgba(19, 22, 39, 0.7);
+      --border-glow: rgba(100, 124, 247, 0.2);
+      --loading-bar: linear-gradient(90deg, transparent, var(--primary), transparent);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #0e1120;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      min-height: 100vh;
+      background-image:
+        radial-gradient(circle at 20% 30%, rgba(100, 124, 247, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(123, 140, 255, 0.06) 0%, transparent 40%);
+      padding-top: 80px;
+      padding-bottom: 50px;
+    }
+
+    .headbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 65px;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      background: rgba(19, 22, 39, 0.75);
+      border-bottom: 1px solid rgba(100, 124, 247, 0.2);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .headbar h1 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+    }
+
+    .headbar a,
+    .headbar button {
+      color: #ffffff !important;
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .headbar a:hover,
+    .headbar button:hover {
+      background: rgba(255, 255, 255, 0.1);
+      transform: scale(1.05);
+    }
+
+    .toggle-icon {
+      display: block;
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toggle-icon.rotated {
+      transform: rotate(180deg);
+    }
+
+    /* === Breadcrumb === */
+    .breadcrumb {
+      padding: 0 16px 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.85rem;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .breadcrumb a {
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .breadcrumb a:hover {
+      color: var(--primary-light);
+    }
+
+    .breadcrumb .separator {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .breadcrumb .active {
+      color: var(--primary);
+      font-weight: 600;
+    }
+
+    /* === Main Content === */
+    main {
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 2rem;
+      border: 1px solid var(--border-glow);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card h2 {
+      color: #ffffff;
+      margin-bottom: 1.5rem;
+      font-weight: 800;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .card h2::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-glow), transparent);
+    }
+
+    .input-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .input-group {
+      position: relative;
+    }
+
+    .input-group label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: 600;
+      color: #f0f1f8;
+      font-size: 0.9rem;
+      letter-spacing: 0.3px;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: 14px;
+      background: rgba(30, 35, 60, 0.5);
+      border: 1px solid var(--border-glow);
+      color: white;
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .input-group input:focus {
+      border-color: var(--primary);
+      background: rgba(30, 35, 60, 0.8);
+      box-shadow: 0 0 0 4px rgba(100, 124, 247, 0.15);
+    }
+
+    /* === Custom Dropdown Mode === */
+    .custom-select {
+      position: relative;
+      width: 100%;
+      background: rgba(30, 35, 60, 0.5);
+      border: 1px solid var(--border-glow);
+      border-radius: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .custom-select:hover {
+      border-color: rgba(100, 124, 247, 0.5);
+    }
+
+    .custom-select .selected {
+      padding: 14px 18px;
+      font-weight: 600;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .custom-select .options {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #1a1e33;
+      border: 1px solid var(--border-glow);
+      border-radius: 14px;
+      max-height: 250px;
+      overflow-y: auto;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(10px);
+    }
+
+    .custom-select.active .options {
+      display: block;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .option {
+      padding: 14px 18px;
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.2s ease;
+    }
+
+    .option:hover {
+      background: rgba(100, 124, 247, 0.15);
+      color: white;
+    }
+
+    .option.selected {
+      background: rgba(100, 124, 247, 0.2);
+      color: var(--primary-light);
+    }
+
+    /* === Button Container Group === */
+    .btn-group {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 10px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 15px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #4e62d4);
+      color: white;
+      box-shadow: 0 8px 20px -6px rgba(100, 124, 247, 0.6);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 25px -6px rgba(100, 124, 247, 0.7);
+    }
+
+    .btn-download {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-glow);
+      color: white;
+    }
+
+    .btn-download:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--primary-light);
+      transform: translateY(-3px);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    /* === Result Section === */
+    .preview-container {
+      width: 100%;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(10, 12, 22, 0.4);
+      border-radius: 20px;
+      border: 2px dashed rgba(100, 124, 247, 0.15);
+      margin-top: 2rem;
+      overflow: hidden;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .preview-container img {
+      max-width: 90%;
+      max-height: 320px;
+      height: auto;
+      object-fit: contain;
+      border-radius: 12px;
+      background: white;
+      padding: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      animation: zoomIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .preview-placeholder {
+      text-align: center;
+      color: rgba(213, 215, 227, 0.4);
+      font-size: 0.9rem;
+      padding: 2rem;
+    }
+
+    .preview-placeholder i {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      opacity: 0.2;
+    }
+
+    .loading-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 4px;
+      background: var(--loading-bar);
+      background-size: 200% 100%;
+      animation: shine 1.5s infinite linear;
+      z-index: 10;
+      transition: width 0.3s ease;
+    }
+
+    @keyframes shine {
+      0% { background-position: 0% 0%; }
+      100% { background-position: 200% 0%; }
+    }
+
+    /* === Toast === */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      padding: 14px 24px;
+      border-radius: 50px;
+      font-weight: 600;
+      z-index: 10000;
+      width: max-content;
+      max-width: 90%;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .toast.success { background: var(--success); color: white; }
+    .toast.warning { background: var(--warning); color: white; }
+    .toast.danger { background: var(--danger); color: white; }
+
+    /* === Social Sidebar === */
+    .social-sidebar {
+      position: fixed;
+      top: 0;
+      right: -280px;
+      width: 280px;
+      height: 100vh;
+      background: rgba(13, 16, 32, 0.95);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-left: 1px solid rgba(100, 124, 247, 0.2);
+      padding: 90px 24px 30px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 999;
+      transition: right 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .social-sidebar.open {
+      right: 0;
+    }
+
+    .social-sidebar h3 {
+      color: white;
+      margin-bottom: 10px;
+      font-size: 1.1rem;
+      font-weight: 700;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border-radius: 16px;
+      color: #9aa0b5;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .social-link:hover {
+      background: rgba(100, 124, 247, 0.15);
+      color: var(--primary-light);
+      transform: translateX(-5px);
+    }
+
+    .social-link i {
+      font-size: 1.4rem;
+      width: 24px;
+    }
+
+    /* === Footer === */
+    footer {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: rgba(154, 160, 181, 0.6);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(100, 124, 247, 0.1);
+    }
+
+    footer a {
+      color: var(--primary-light);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    /* === Mobile Responsiveness === */
+    @media (max-width: 600px) {
+      body {
+        padding-top: 75px;
+      }
+
+      .card {
+        padding: 1.5rem;
+        border-radius: 20px;
+      }
+
+      .headbar h1 {
+        font-size: 1rem;
+      }
+
+      .btn-group {
+        grid-template-columns: 1fr; /* Stack buttons vertically */
+      }
+
+      .preview-container {
+        min-height: 220px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Headbar -->
+  <div class="headbar">
+    <a href="index.html">
+      <i class="fas fa-chevron-left"></i>
+    </a>
+    <h1>Berry Brat Generator</h1>
+    <button id="sidebarToggle" aria-label="Menu">
+      <i class="fas fa-bars toggle-icon" id="toggleIcon"></i>
+    </button>
+  </div>
+
+  <!-- Social Sidebar -->
+  <div class="social-sidebar" id="socialSidebar">
+    <h3>Community</h3>
+    <a href="https://wa.me/?text=Halo%20BerryMod!" target="_blank" class="social-link">
+      <i class="fab fa-whatsapp"></i> WhatsApp
+    </a>
+    <a href="https://youtube.com/@BerryModApeka" target="_blank" class="social-link">
+      <i class="fab fa-youtube"></i> YouTube
+    </a>
+    <a href="https://instagram.com/berrymodapeka" target="_blank" class="social-link">
+      <i class="fab fa-instagram"></i> Instagram
+    </a>
+    <a href="https://t.me/berrymodapeka" target="_blank" class="social-link">
+      <i class="fab fa-telegram"></i> Telegram
+    </a>
+  </div>
+
+  <div class="breadcrumb">
+    <a href="/">Home</a>
+    <span class="separator"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i></span>
+    <span class="active">Brat Generator</span>
+  </div>
+
+  <main>
+    <div class="card">
+      <h2>Generator Sticker</h2>
+
+      <div class="input-section">
+        <div class="input-group">
+          <label for="textInput">Teks Sticker</label>
+          <input type="text" id="textInput" placeholder="Masukkan kata-kata..." maxlength="100" spellcheck="false" autocomplete="off">
+        </div>
+
+        <div class="input-group">
+          <label>Mode Tampilan</label>
+          <div class="custom-select" id="modeSelect">
+            <div class="selected" id="selectedMode">
+              <span id="selectedText">Pilih Tipe Brat</span>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="options">
+              <div class="option" data-value="">
+                <span>Pilih Tipe Brat</span>
+                <i class="far fa-circle"></i>
+              </div>
+              <div class="option" data-value="static">
+                <span>Static Brat (PNG)</span>
+                <i class="far fa-circle"></i>
+              </div>
+              <div class="option" data-value="animated">
+                <span>Animated Brat (GIF)</span>
+                <i class="far fa-circle"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" id="generateBtn">
+            <i class="fas fa-magic"></i> Generate
+          </button>
+          <button class="btn btn-download" id="downloadBtn">
+            <i class="fas fa-cloud-arrow-down"></i> Simpan
+          </button>
+        </div>
+      </div>
+
+      <div class="preview-container">
+        <div class="loading-bar" id="loadingBar"></div>
+        <div class="preview-placeholder" id="placeholder">
+          <i class="fas fa-wand-sparkles"></i>
+          <p>Hasil sticker akan muncul di sini setelah di-generate</p>
+        </div>
+      </div>
+
+      <div class="toast" id="toast"></div>
+    </div>
+  </main>
+
+  <footer>
+    <p>
+      <i class="fab fa-whatsapp"></i>
+      <a href="/Linktree" target="_blank">IKUTI SALURAN WHATSAPP</a>
+    </p>
+    <div style="height: 1px; background: rgba(100, 124, 247, 0.1); width: 60px; margin: 1.5rem auto;"></div>
+    <p>&copy; 2025 <a href="https://berrymodapeka.edgeone.app/" target="_blank">BERRY V4</a>. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('socialSidebar');
+    const toggleIcon = document.getElementById('toggleIcon');
+
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('open');
+      toggleIcon.classList.toggle('fa-bars');
+      toggleIcon.classList.toggle('fa-xmark');
+      toggleIcon.classList.toggle('rotated');
+    });
+
+    document.addEventListener('click', (e) => {
+      if (sidebar.classList.contains('open') &&
+          !sidebar.contains(e.target) &&
+          !toggleBtn.contains(e.target)) {
+        sidebar.classList.remove('open');
+        toggleIcon.classList.replace('fa-xmark', 'fa-bars');
+        toggleIcon.classList.remove('rotated');
+      }
+    });
+
+    const modeSelect = document.getElementById('modeSelect');
+    const selectedText = document.getElementById('selectedText');
+    const options = modeSelect.querySelectorAll('.option');
+    let currentMode = '';
+
+    document.getElementById('selectedMode').addEventListener('click', (e) => {
+      e.stopPropagation();
+      modeSelect.classList.toggle('active');
+    });
+
+    options.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const value = option.getAttribute('data-value');
+        const text = option.querySelector('span').textContent;
+
+        currentMode = value;
+        selectedText.textContent = text;
+
+        options.forEach(opt => {
+          opt.classList.remove('selected');
+          opt.querySelector('i').className = 'far fa-circle';
+        });
+
+        option.classList.add('selected');
+        option.querySelector('i').className = 'fas fa-check-circle';
+
+        modeSelect.classList.remove('active');
+      });
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!modeSelect.contains(e.target)) {
+        modeSelect.classList.remove('active');
+      }
+    });
+
+    const textInput = document.getElementById('textInput');
+    const generateBtn = document.getElementById('generateBtn');
+    const downloadBtn = document.getElementById('downloadBtn');
+    const previewContainer = document.querySelector('.preview-container');
+    const placeholder = document.getElementById('placeholder');
+    const loadingBar = document.getElementById('loadingBar');
+    const toast = document.getElementById('toast');
+
+    const API_STATIC = 'https://api.fikmydomainsz.xyz/imagecreator/brat';
+    const API_ANIMATED = 'https://api.fikmydomainsz.xyz/imagecreator/bratvid';
+
+    function showToast(message, type = 'info') {
+      const icon = type === 'success' ? 'check-circle' : (type === 'warning' ? 'exclamation-triangle' : 'times-circle');
+      toast.innerHTML = `<i class="fas fa-${icon}"></i> ${message}`;
+      toast.className = `toast ${type}`;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function clearPreview() {
+      const existingImg = previewContainer.querySelector('img');
+      if (existingImg) existingImg.remove();
+      placeholder.style.display = 'flex';
+    }
+
+    function buildUrl(text) {
+      const base = currentMode === 'static' ? API_STATIC : API_ANIMATED;
+      return `${base}?text=${encodeURIComponent(text)}&_ts=${Date.now()}`;
+    }
+
+    async function generate() {
+      const text = textInput.value.trim();
+      if (!text) {
+        showToast('Teks tidak boleh kosong!', 'warning');
+        return;
+      }
+      if (!currentMode) {
+        showToast('Pilih mode terlebih dahulu!', 'warning');
+        return;
+      }
+
+      const url = buildUrl(text);
+      loadingBar.style.width = '70%';
+      placeholder.style.display = 'none';
+
+      const oldImg = previewContainer.querySelector('img');
+      if (oldImg) oldImg.remove();
+
+      try {
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'Brat Preview';
+
+        img.onload = () => {
+          loadingBar.style.width = '100%';
+          setTimeout(() => { loadingBar.style.width = '0%'; }, 500);
+          previewContainer.appendChild(img);
+          showToast('Berhasil dibuat!', 'success');
+        };
+
+        img.onerror = () => {
+          loadingBar.style.width = '0%';
+          clearPreview();
+          showToast('Server Sedang Sibuk. Coba lagi.', 'danger');
+        };
+
+      } catch (err) {
+        loadingBar.style.width = '0%';
+        clearPreview();
+        showToast('Gagal memuat Server.', 'danger');
+      }
+    }
+
+    async function download() {
+      const img = previewContainer.querySelector('img');
+      if (!img) {
+        showToast('Generate dulu baru bisa simpan.', 'warning');
+        return;
+      }
+
+      const text = textInput.value.trim();
+      const url = img.src;
+      const ext = currentMode === 'static' ? 'png' : 'gif';
+      const filename = `BerryBrat_${Date.now()}.${ext}`;
+
+      showToast('Sedang mengunduh...', 'success');
+
+      try {
+        const resp = await fetch(url);
+        const blob = await resp.blob();
+        const blobUrl = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = blobUrl;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(blobUrl);
+      } catch (err) {
+        window.open(url, '_blank');
+      }
+    }
+
+    generateBtn.addEventListener('click', generate);
+    downloadBtn.addEventListener('click', download);
+    textInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') generate();
+    });
+  </script>
+</body>
+</html>
