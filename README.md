@@ -1,7 +1,7 @@
 # Berry Brat Generator
 
 <p align="center">
-  <img src="https://berrymodapeka.edgeone.app/og-brat.jpg" alt="Berry Brat Generator Preview" width="800">
+  <img src="https://berrymodapeka.edgeone.app/ImageGenerator/Brat/Preview-Brat1.png" alt="Berry Brat Generator Preview" width="800">
 </p>
 
 <p align="center">
@@ -50,8 +50,7 @@ API          | Brat API |
 ## 📸 Preview
 
 <p align="center">
-  <img src="https://berrymodapeka.edgeone.app/assets/preview1.png" width="240">
-  <img src="https://berrymodapeka.edgeone.app/assets/preview2.png" width="240">
-  <img src="https://berrymodapeka.edgeone.app/assets/preview3.png" width="240">
+  <img src="https://berrymodapeka.edgeone.app/ImageGenerator/Brat/Preview-Brat1.png" width="240">
+  <img src="https://berrymodapeka.edgeone.app/ImageGenerator/Brat/Preview-Brat2.png" width="240">
 </p>
 
