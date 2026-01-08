@@ -40,7 +40,7 @@
 }
 </script>
 
-  <style>
+<style>
     :root {
       --primary: #647cf7;
       --primary-light: #7b8cff;
@@ -129,7 +129,6 @@
       transform: rotate(180deg);
     }
 
-    /* === Breadcrumb === */
     .breadcrumb {
       padding: 0 16px 24px;
       display: flex;
@@ -161,7 +160,6 @@
       font-weight: 600;
     }
 
-    /* === Main Content === */
     main {
       max-width: 800px;
       width: 100%;
@@ -237,7 +235,6 @@
       box-shadow: 0 0 0 4px rgba(100, 124, 247, 0.15);
     }
 
-    /* === Custom Dropdown Mode === */
     .custom-select {
       position: relative;
       width: 100%;
@@ -307,7 +304,6 @@
       color: var(--primary-light);
     }
 
-    /* === Button Container Group === */
     .btn-group {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -359,7 +355,6 @@
       transform: translateY(0) scale(0.98);
     }
 
-    /* === Result Section === */
     .preview-container {
       width: 100%;
       min-height: 280px;
@@ -424,7 +419,6 @@
       100% { background-position: 200% 0%; }
     }
 
-    /* === Toast === */
     .toast {
       position: fixed;
       bottom: 30px;
@@ -453,7 +447,6 @@
     .toast.warning { background: var(--warning); color: white; }
     .toast.danger { background: var(--danger); color: white; }
 
-    /* === Social Sidebar === */
     .social-sidebar {
       position: fixed;
       top: 0;
@@ -507,7 +500,6 @@
       width: 24px;
     }
 
-    /* === Footer === */
     footer {
       text-align: center;
       padding: 3rem 1rem;
@@ -523,7 +515,6 @@
       font-weight: 600;
     }
 
-    /* === Mobile Responsiveness === */
     @media (max-width: 600px) {
       body {
         padding-top: 75px;
@@ -539,115 +530,113 @@
       }
 
       .btn-group {
-        grid-template-columns: 1fr; /* Stack buttons vertically */
+        grid-template-columns: 1fr;
       }
 
       .preview-container {
         min-height: 220px;
       }
     }
-  </style>
+</style>
 </head>
 <body>
 
-  <!-- Headbar -->
-  <div class="headbar">
-    <a href="index.html">
-      <i class="fas fa-chevron-left"></i>
+<div class="headbar">
+    <a href="https://berrymodapeka.edgeone.app/">
+        <i class="fas fa-chevron-left"></i>
     </a>
     <h1>Berry Brat Generator</h1>
     <button id="sidebarToggle" aria-label="Menu">
-      <i class="fas fa-bars toggle-icon" id="toggleIcon"></i>
+        <i class="fas fa-bars toggle-icon" id="toggleIcon"></i>
     </button>
-  </div>
+</div>
 
-  <!-- Social Sidebar -->
-  <div class="social-sidebar" id="socialSidebar">
+<div class="social-sidebar" id="socialSidebar">
     <h3>Community</h3>
-    <a href="https://wa.me/?text=Halo%20BerryMod!" target="_blank" class="social-link">
-      <i class="fab fa-whatsapp"></i> WhatsApp
+    <a href="https://chat.whatsapp.com/KorsL8OkfMe7ObsrtxYPWF" target="_blank" class="social-link">
+        <i class="fab fa-whatsapp"></i> WhatsApp
     </a>
-    <a href="https://youtube.com/@BerryModApeka" target="_blank" class="social-link">
-      <i class="fab fa-youtube"></i> YouTube
+    <a href="https://youtube.com/@BERRYV4VFX" target="_blank" class="social-link">
+        <i class="fab fa-youtube"></i> YouTube
     </a>
-    <a href="https://instagram.com/berrymodapeka" target="_blank" class="social-link">
-      <i class="fab fa-instagram"></i> Instagram
+    <a href="https://instagram.com/berry_v4" target="_blank" class="social-link">
+        <i class="fab fa-instagram"></i> Instagram
     </a>
-    <a href="https://t.me/berrymodapeka" target="_blank" class="social-link">
-      <i class="fab fa-telegram"></i> Telegram
+    <a href="https://t.me/berryv4" target="_blank" class="social-link">
+        <i class="fab fa-telegram"></i> Telegram
     </a>
-  </div>
+</div>
 
-  <div class="breadcrumb">
+<div class="breadcrumb">
     <a href="/">Home</a>
     <span class="separator"><i class="fas fa-chevron-right" style="font-size: 0.7rem;"></i></span>
     <span class="active">Brat Generator</span>
-  </div>
+</div>
 
-  <main>
+<main>
     <div class="card">
-      <h2>Generator Sticker</h2>
+        <h2>Generator Sticker</h2>
 
-      <div class="input-section">
+        <div class="input-section">
         <div class="input-group">
-          <label for="textInput">Teks Sticker</label>
-          <input type="text" id="textInput" placeholder="Masukkan kata-kata..." maxlength="100" spellcheck="false" autocomplete="off">
+            <label for="textInput">Teks Sticker</label>
+            <input type="text" id="textInput" placeholder="Masukkan kata-kata..." maxlength="100" spellcheck="false" autocomplete="off">
         </div>
 
         <div class="input-group">
-          <label>Mode Tampilan</label>
-          <div class="custom-select" id="modeSelect">
+            <label>Mode Tampilan</label>
+            <div class="custom-select" id="modeSelect">
             <div class="selected" id="selectedMode">
-              <span id="selectedText">Pilih Tipe Brat</span>
-              <i class="fas fa-chevron-down"></i>
+                <span id="selectedText">Pilih Tipe Brat</span>
+                <i class="fas fa-chevron-down"></i>
             </div>
             <div class="options">
-              <div class="option" data-value="">
+                <div class="option" data-value="">
                 <span>Pilih Tipe Brat</span>
                 <i class="far fa-circle"></i>
-              </div>
-              <div class="option" data-value="static">
+                </div>
+                <div class="option" data-value="static">
                 <span>Static Brat (PNG)</span>
                 <i class="far fa-circle"></i>
-              </div>
-              <div class="option" data-value="animated">
+                </div>
+                <div class="option" data-value="animated">
                 <span>Animated Brat (GIF)</span>
                 <i class="far fa-circle"></i>
-              </div>
+                </div>
             </div>
-          </div>
+            </div>
         </div>
 
         <div class="btn-group">
-          <button class="btn btn-primary" id="generateBtn">
+            <button class="btn btn-primary" id="generateBtn">
             <i class="fas fa-magic"></i> Generate
-          </button>
-          <button class="btn btn-download" id="downloadBtn">
+            </button>
+            <button class="btn btn-download" id="downloadBtn">
             <i class="fas fa-cloud-arrow-down"></i> Simpan
-          </button>
+            </button>
         </div>
-      </div>
+        </div>
 
-      <div class="preview-container">
+        <div class="preview-container">
         <div class="loading-bar" id="loadingBar"></div>
         <div class="preview-placeholder" id="placeholder">
-          <i class="fas fa-wand-sparkles"></i>
-          <p>Hasil sticker akan muncul di sini setelah di-generate</p>
+            <i class="fas fa-wand-sparkles"></i>
+            <p>Hasil sticker akan muncul di sini setelah di-generate</p>
         </div>
-      </div>
+        </div>
 
-      <div class="toast" id="toast"></div>
+        <div class="toast" id="toast"></div>
     </div>
-  </main>
+</main>
 
-  <footer>
+<footer>
     <p>
-      <i class="fab fa-whatsapp"></i>
-      <a href="/Linktree" target="_blank">IKUTI SALURAN WHATSAPP</a>
+        <i class="fab fa-whatsapp"></i>
+        <a href="/Linktree" target="_blank">IKUTI SALURAN WHATSAPP</a>
     </p>
     <div style="height: 1px; background: rgba(100, 124, 247, 0.1); width: 60px; margin: 1.5rem auto;"></div>
     <p>&copy; 2025 <a href="https://berrymodapeka.edgeone.app/" target="_blank">BERRY V4</a>. All rights reserved.</p>
-  </footer>
+</footer>
 
   <script>
     const toggleBtn = document.getElementById('sidebarToggle');
